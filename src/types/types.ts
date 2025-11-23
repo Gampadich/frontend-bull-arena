@@ -1,4 +1,4 @@
-export interface BullRunDetail{
+interface BullRunDetail{
     position : number
 }
 

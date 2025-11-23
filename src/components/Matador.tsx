@@ -1,24 +1,37 @@
-import { useState, useEffect } from "react"
-import { BullRunEvent } from "../types/types"
+import { useState, useEffect } from "react";
+import { BullRunEvent } from "../types/types";
+import { MatadorProps } from "../types/matadorProps";
 
-export const Matador = () => {
-    const [matadorPosition, setPos] = useState(4)
-    useEffect(() => {
-        const bullRun = (event : BullRunEvent) => {
-            const bullPosition = event.detail.position
-            if(bullPosition === matadorPosition){
-                setPos(Math.floor(Math.random() * 8))
-                console.log(matadorPosition)
-            }
+export const Matador = ({ position, setPosition }: MatadorProps) => {
+  const generateNewPos = (currentPos: number): number => {
+    let newPos;
+    do {
+      newPos = Math.floor(Math.random() * 8);
+    } while (newPos === currentPos); 
+    return newPos;
+  };
+
+  useEffect(() => {
+    const bullRun = (event: BullRunEvent) => {
+      const bullPos = event.detail.position;
+
+      setPosition((oldPos) => {
+        if (bullPos === oldPos) {
+          const newPos = generateNewPos(oldPos);
+          console.log(`Matador is moving from ${oldPos} to ${newPos}`);
+          return newPos;
         }
-        document.addEventListener('bullRun', bullRun as EventListener)
-        return(() => {
-            document.removeEventListener('bullRun', bullRun as EventListener)
-        })
-    })
-    return (
-        <>
-            <div>i am motador</div>
-        </>
-    )
-}
+        return oldPos;
+      });
+    };
+    document.addEventListener('bullRun', bullRun as EventListener)
+    return () => {
+        document.removeEventListener('bullRun', bullRun as EventListener)
+    }
+  }, [setPosition]);
+  return (
+    <>
+      <div>i am motador</div>
+    </>
+  );
+};
