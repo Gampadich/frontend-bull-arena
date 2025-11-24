@@ -1,11 +1,21 @@
 import { useState, useEffect } from "react";
 import { BullRunEvent } from "../types/types";
 import { MatadorProps } from "../types/matadorProps";
+import ReactDOM from "react-dom";
 
 export const Matador = (props : MatadorProps) => {
   const [render, isRender] = useState(false)
   const {matadorPosition, setMatarodPosition} = props
   let { applause } = props
+  let oldApplause
+  if(applause === 3){
+    if(applause !== oldApplause){
+      oldApplause = applause
+      isRender(true)
+    } else if (applause === oldApplause){
+      isRender(false)
+    }
+  }
   useEffect(() => {
     const bullRun = (event: BullRunEvent) => {
       const bullPos = event.detail.position;
@@ -23,7 +33,10 @@ export const Matador = (props : MatadorProps) => {
   }, [matadorPosition]);
   return (
     <>
-      <div>i am motador</div>
+      {render 
+        ?<div>I am happy motador</div>
+        :<div>i am motador</div>
+      }
     </>
   );
 };
