@@ -18,7 +18,7 @@ export const Matador = (props : MatadorProps) => {
     return () => {
         document.removeEventListener('bullRun', bullRun as EventListener)
     }
-  }, [matadorPosition, setMatadorPosition]);
+  }, [matadorPosition]);
   return (
     <>
       <div>i am motador</div>
