@@ -1,4 +1,4 @@
 export interface MatadorProps {
     matadorPosition: number; 
-    setMatadorPosition: (position: number) => void;
+    setMatarodPosition: (position: number) => void;
 }

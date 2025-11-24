@@ -3,14 +3,14 @@ import { BullRunEvent } from "../types/types";
 import { MatadorProps } from "../types/matadorProps";
 
 export const Matador = (props : MatadorProps) => {
-  const {matadorPosition, setMatadorPosition} = props
+  const {matadorPosition, setMatarodPosition} = props
   useEffect(() => {
     const bullRun = (event: BullRunEvent) => {
       const bullPos = event.detail.position;
       let oldPos = matadorPosition
       if(bullPos === oldPos){
         let random = Math.floor(Math.random() * 8)
-        setMatadorPosition(random)
+        setMatarodPosition(random)
         console.log(`Matador is moving from ${oldPos} to ${random}`)
       }
     };
