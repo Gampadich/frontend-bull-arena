@@ -3,6 +3,7 @@ import { BullRunEvent } from "../types/types";
 import { MatadorProps } from "../types/matadorProps";
 
 export const Matador = (props : MatadorProps) => {
+  const [render, isRender] = useState(false)
   const {matadorPosition, setMatarodPosition} = props
   let { applause } = props
   useEffect(() => {
