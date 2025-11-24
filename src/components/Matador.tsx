@@ -4,6 +4,7 @@ import { MatadorProps } from "../types/matadorProps";
 
 export const Matador = (props : MatadorProps) => {
   const {matadorPosition, setMatarodPosition} = props
+  let { applause } = props
   useEffect(() => {
     const bullRun = (event: BullRunEvent) => {
       const bullPos = event.detail.position;
