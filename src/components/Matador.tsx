@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import React from 'react'
 import { BullRunEvent } from "../types/types";
 import { MatadorProps } from "../types/matadorProps";
 
-export const Matador = (props: MatadorProps) => {
+export const Matador = React.memo((props: MatadorProps) => {
   const [render, isRender] = useState(false);
   const { matadorPosition, setMatarodPosition } = props;
   let { applause } = props;
@@ -31,8 +32,8 @@ export const Matador = (props: MatadorProps) => {
     return () => {
       document.removeEventListener("bullRun", bullRun as EventListener);
     };
-  }, [matadorPosition]);
+  }, [setMatarodPosition]);
   return (
     <>{render ? <div>I am happy motador</div> : <div>i am motador</div>}</>
   );
-};
+});
