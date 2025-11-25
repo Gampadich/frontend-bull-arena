@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import React from 'react'
 import { BullRunEvent } from "../types/types";
 import { MatadorProps } from "../types/matadorProps";
@@ -7,15 +7,18 @@ export const Matador = React.memo((props: MatadorProps) => {
   const [render, isRender] = useState(false);
   const { matadorPosition, setMatarodPosition } = props;
   let { applause } = props;
-  let oldApplause: number;
+  const oldApplauseRef = useRef(applause)
   useEffect(() => {
     if (applause === 3) {
+      let oldApplause = oldApplauseRef.current;
       if (applause !== oldApplause) {
-        oldApplause = applause;
+        oldApplauseRef.current = applause
         isRender(true);
       } else if (applause === oldApplause) {
         isRender(false);
       }
+    } else {
+      oldApplauseRef.current = applause
     }
   }, [applause]);
   useEffect(() => {
@@ -34,6 +37,8 @@ export const Matador = React.memo((props: MatadorProps) => {
     };
   }, [setMatarodPosition]);
   return (
-    <>{render ? <div>I am happy motador</div> : <div>i am motador</div>}</>
+    <>
+      {render ? <h3>I am happy motador</h3> : <h3>i am motador</h3>}
+    </>
   );
 });
