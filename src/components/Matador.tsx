@@ -2,12 +2,27 @@ import { useState, useEffect, useRef } from "react";
 import React from 'react'
 import { BullRunEvent } from "../types/types";
 import { MatadorProps } from "../types/matadorProps";
+import FirstSound from "./Sounds/firstSound.mp3"
+import SecondSound from "./Sounds/SecondSound.mp3"
+import ThirdSound from "./Sounds/ThirdSound.mp3"
 
 export const Matador = React.memo((props: MatadorProps) => {
   const [render, isRender] = useState(false);
   const { matadorPosition, setMatarodPosition } = props;
   let { applause } = props;
   const oldApplauseRef = useRef(applause)
+
+  if (applause === 1){
+    const firstSound = new Audio(FirstSound)
+    firstSound.play()
+  } else if (applause === 2){
+    const secondSound = new Audio(SecondSound)
+    secondSound.play()
+  } else if (applause === 3){
+    const thirdSound = new Audio(ThirdSound)
+    thirdSound.play()
+  }
+
   useEffect(() => {
     if (applause === 3) {
       let oldApplause = oldApplauseRef.current;
