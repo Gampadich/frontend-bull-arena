@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <ArenaWithBull
-        matador={<OldMatador />} />
+        matador={<Matador />} />
     </div>
   )
 }
